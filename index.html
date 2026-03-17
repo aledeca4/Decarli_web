@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Studente</title>
+    <style>
+        /* CSS: Stile della pagina */
+        :root {
+            --bg: #f4f7f6;
+            --primary: #4a90e2;
+            --card: #ffffff;
+            --text: #333;
+            --done: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 { color: var(--primary); }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* I riquadri delle materie */
+        .subject-card {
+            background: var(--card);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .subject-card h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+        }
+
+        /* I singoli compiti */
+        .task {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .task:hover { background: #f0f0f0; }
+
+        .task input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* Classe per quando il compito è finito */
+        .completed {
+            text-decoration: line-through;
+            color: var(--done);
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📚 I Miei Compiti</h1>
+
+    <div class="container" id="mainGrid">
+        
+        <div class="subject-card">
+            <h2>Matematica</h2>
+            <div class="task">
+                <input type="checkbox" onclick="toggleTask(this)">
+                <span>Studiare i limiti</span>
+            </div>
+            <div class="task">
+                <input type="checkbox" onclick="toggleTask(this)">
+                <span>Esercizi pag. 50</span>
+            </div>
+        </div>
+
+        <div class="subject-card">
+            <h2>Italiano</h2>
+            <div class="task">
+                <input type="checkbox" onclick="toggleTask(this)">
+                <span>Lettura Divina Commedia</span>
+            </div>
+        </div>
+
+        <div class="subject-card">
+            <h2>Inglese</h2>
+            <div class="task">
+                <input type="checkbox" onclick="toggleTask(this)">
+                <span>Grammar Unit 4</span>
+            </div>
+        </div>
+
+    </div>
+
+    <button onclick="addSubject()">+ Aggiungi Materia</button>
+
+    <script>
+        // Funzione per barrare il testo quando clicchi sulla checkbox
+        function toggleTask(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add('completed');
+            } else {
+                label.classList.remove('completed');
+            }
+            // Qui potresti aggiungere il salvataggio automatico
+        }
+
+        // Funzione per aggiungere una nuova sezione dinamicamente
+        function addSubject() {
+            const nome = prompt("Che materia vuoi aggiungere?");
+            if (nome) {
+                const grid = document.getElementById('mainGrid');
+                const newCard = document.createElement('div');
+                newCard.className = 'subject-card';
+                newCard.innerHTML = `
+                    <h2>${nome}</h2>
+                    <div class="task">
+                        <input type="checkbox" onclick="toggleTask(this)">
+                        <span>Nuovo compito...</span>
+                    </div>
+                `;
+                grid.appendChild(newCard);
+            }
+        }
+    </script>
+
+</body>
+</html>
