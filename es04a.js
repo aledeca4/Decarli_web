@@ -13,10 +13,10 @@ case "add":
 result = num1 + num2;
 break;
 case "sub":
-result = num1 num2;
+result = num1 - num2;
 break;
 Casi "mul":
-result = num1 num2;
+result = num1 * num2;
 break;
 case "div":
 if (num2 = 0) {
