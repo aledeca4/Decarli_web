@@ -15,7 +15,7 @@ break;
 case "sub":
 result = num1 - num2;
 break;
-Casi "mul":
+case "mul":
 result = num1 * num2;
 break;
 case "div":
