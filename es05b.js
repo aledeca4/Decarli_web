@@ -1,10 +1,10 @@
 // Creazione oggetto libro
 const book = {
-  titolo: "Il nome della rosa",
-  autore: "Umberto Eco",
-  annoPubblicazione: 1980,
-  genere: "Romanzo storico",
-  numeroPagine: 512
+  titolo: "IT",
+  autore: "stephen king",
+  annoPubblicazione: 1986,
+  genere: "Thriller",
+  numeroPagine: 1216
 };
 
 // Stampa le proprietà dell'oggetto sulla console
