@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-rl.question("Inserisci un numero intero: ",(input) {
+rl.question("Inserisci un numero intero: ",(input) => {
   const numero = parseInt(input);
   if (isNaN(numero)) {
     console.log("inserisci numero valido.");
