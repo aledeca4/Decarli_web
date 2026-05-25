@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>ES08A-F</title>
+
+<style>
+    body{
+        font-family: Arial;
+        padding: 20px;
+    }
+
+    input{
+        display: block;
+        margin-bottom: 15px;
+        padding: 8px;
+        width: 250px;
+    }
+
+    button{
+        padding: 10px 20px;
+        background-color: lightblue;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    #errore{
+        color: red;
+        font-weight: bold;
+    }
+
+    #sicurezza{
+        font-weight: bold;
+        margin-top: -10px;
+        margin-bottom: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Form con Eventi JavaScript</h2>
+
+<form>
+
+    <!-- NOME -->
+    <label>Nome</label>
+    <input type="text" class="focusBlur">
+
+    <!-- COGNOME -->
+    <label>Cognome</label>
+    <input type="text" class="focusBlur">
+
+    <!-- CODICE FISCALE -->
+    <label>Codice Fiscale</label>
+    <input type="text" id="codice_fiscale" class="focusBlur">
+
+    <!-- PASSWORD -->
+    <label>Password</label>
+    <input type="password" id="password">
+
+    <div id="sicurezza"></div>
+
+    <!-- RIPETI PASSWORD -->
+    <label>Ripeti Password</label>
+    <input type="password" id="ripetipassword">
+
+    <div id="errore"></div>
+
+    <!-- TESTO DA NASCONDERE -->
+    <p id="testo">
+        Questo testo verrà nascosto dopo il click.
+    </p>
+
+    <!-- PULSANTI -->
+    <button type="button" id="btnNascondi">
+        Nascondi Testo
+    </button>
+
+    <button type="submit">
+        Invia
+    </button>
+
+</form>
+
+<script>
+
+    // =====================================
+    // 1. CAMBIO COLORE PULSANTI
+    // =====================================
+
+    let pulsanti = document.querySelectorAll("button");
+
+    pulsanti.forEach(function(btn){
+
+        btn.addEventListener("mouseover", function(){
+            btn.style.backgroundColor = "darkblue";
+            btn.style.color = "white";
+        });
+
+        btn.addEventListener("mouseout", function(){
+            btn.style.backgroundColor = "lightblue";
+            btn.style.color = "black";
+        });
+
+    });
+
+
+    // =====================================
+    // 2. MAIUSCOLO CODICE FISCALE
+    // =====================================
+
+    let cf = document.getElementById("codice_fiscale");
+
+    cf.addEventListener("input", function(){
+        cf.value = cf.value.toUpperCase();
+    });
+
+
+    // =====================================
+    // 3. FOCUS E BLUR SU TUTTI I TEXT
+    // =====================================
+
+    let campi = document.querySelectorAll(".focusBlur");
+
+    campi.forEach(function(campo){
+
+        campo.addEventListener("focus", function(){
+            campo.style.backgroundColor = "yellow";
+        });
+
+        campo.addEventListener("blur", function(){
+            campo.style.backgroundColor = "white";
+        });
+
+    });
+
+
+    // =====================================
+    // 4. NASCONDI TESTO
+    // =====================================
+
+    let bottoneNascondi = document.getElementById("btnNascondi");
+    let testo = document.getElementById("testo");
+
+    bottoneNascondi.addEventListener("click", function(){
+        testo.hidden = true;
+    });
+
+
+    // =====================================
+    // 5. CONTROLLO PASSWORD UGUALI
+    // =====================================
+
+    let password = document.getElementById("password");
+    let ripeti = document.getElementById("ripetipassword");
+    let errore = document.getElementById("errore");
+
+    ripeti.addEventListener("input", function(){
+
+        if(password.value !== ripeti.value){
+            errore.innerHTML = "Le password non coincidono";
+        }
+        else{
+            errore.innerHTML = "";
+        }
+
+    });
+
+
+    // =====================================
+    // 6. SICUREZZA PASSWORD
+    // =====================================
+
+    let sicurezza = document.getElementById("sicurezza");
+
+    password.addEventListener("input", function(){
+
+        let valore = password.value;
+
+        let haNumero = /[0-9]/.test(valore);
+        let haMaiuscola = /[A-Z]/.test(valore);
+
+        // PASSWORD DEBOLE
+        if(valore.length < 6){
+
+            password.style.backgroundColor = "lightcoral";
+            sicurezza.innerHTML = "Password debole";
+            sicurezza.style.color = "red";
+
+        }
+
+        // PASSWORD MEDIA
+        else if(valore.length >= 6 && haNumero){
+
+            password.style.backgroundColor = "khaki";
+            sicurezza.innerHTML = "Password mediamente forte";
+            sicurezza.style.color = "orange";
+
+        }
+
+        // PASSWORD FORTE
+        if(valore.length >= 8 && haNumero && haMaiuscola){
+
+            password.style.backgroundColor = "lightgreen";
+            sicurezza.innerHTML = "Password forte";
+            sicurezza.style.color = "green";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
